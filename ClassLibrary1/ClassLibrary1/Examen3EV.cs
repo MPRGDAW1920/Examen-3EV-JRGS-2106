@@ -2,48 +2,88 @@
 
 namespace Examen3EV_NS
 {
-    public class estNot  // esta clase nos calcula las estadísticas de un conjunto de notas 
+    /// <summary>
+    /// Esta clase nos calcula las estadísticas de un conjunto de notas 
+    /// </summary>
+    
+    public class EstNot  
     {
-        public int sus;  // Suspensos
-        public int apr;  // Aprobados
-        public int not;  // Notables
-        public int sbr;  // Sobresalientes
+        private int suspenso;  
+        private int aprobado;  
+        private int notable;  
+        private int sobresliente;  
 
-        public double media; // Nota media
+        private double notamedia; 
 
-        // Constructor vacío
-        public estNot()
+        public int Suspenso 
         {
-            sus = apr = not = sbr = 0;  // inicializamos las variables
-            media = 0.0;
+            get => suspenso; 
+            set => suspenso = value;
+        }
+        public int Aprobado 
+        { 
+            get => aprobado;
+            set => aprobado = value; 
+        }
+        public int Notable 
+        { 
+            get => notable; 
+            set => notable = value;
+        }
+        public int Sobresaliente
+        { 
+            get => sobresliente; 
+            set => sobresliente = value; 
+        }
+        public double Media
+        { 
+            get => notamedia; 
+            set => notamedia = value;
         }
 
-        // Constructor a partir de un array, calcula las estadísticas al crear el objeto
-        public estNot(List<int> listnot)
+        // Constructor vacío
+
+        /// <summary>
+        ///  Inicilizamos variables
+        /// </summary>
+        public EstNot()
         {
-            media = 0.0;
+            Suspenso = Aprobado = Notable = Sobresaliente = 0; 
+            Media = 0.0;
+        }
+
+        /// <sumary> 
+        /// Constructor a partir de un array, calcula las estadísticas al crear el objeto
+        /// </sumary>
+        /// <param name="listnot" array que se recorrera para obter la media> /param>
+        /// <returns>media</returns>
+
+        public EstNot(List<int> listnot)
+        {
+            Media = 0.0;
 
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5) sus++;              // Por debajo de 5 suspenso
-                else if (listnot[i] > 5 && listnot[i] < 7) apr++;// Nota para aprobar: 5
-                else if (listnot[i] > 7 && listnot[i] < 9) not++;// Nota para notable: 7
-                else if (listnot[i] > 9) sbr++;         // Nota para sobresaliente: 9
+                if (listnot[i] < 5) Suspenso++;              // Por debajo de 5 suspenso
+                else if (listnot[i] > 5 && listnot[i] < 7) Aprobado++;// Nota para aprobar: 5
+                else if (listnot[i] > 7 && listnot[i] < 9) Notable++;// Nota para notable: 7
+                else if (listnot[i] > 9) Sobresaliente++;         // Nota para sobresaliente: 9
 
-                media = media + listnot[i];
+                Media = Media + listnot[i];
             }
 
-            media = media / listnot.Count;
+            Media = Media / listnot.Count;
         }
 
-
-        // Para un conjunto de listnot, calculamos las estadísticas
-        // calcula la media y el número de suspensos/aprobados/notables/sobresalientes
-        //
-        // El método devuelve -1 si ha habido algún problema, la media en caso contrario	
+        /// <summary>
+        /// Para un conjunto de listnot, calculamos las estadísticas
+        /// calcula la notamedia y el número de suspensos/aprobados/notables/sobresalientes
+        /// El método devuelve -1 si ha habido algún problema, la notamedia en caso contrario
+        /// </summary>
+        
         public double calcEst(List<int> listnot)
         {                                 
-            media = 0.0;
+            Media = 0.0;
 
             // TODO: hay que modificar el tratamiento de errores para generar excepciones
             //
@@ -51,22 +91,22 @@ namespace Examen3EV_NS
                 return -1;
 
             for (int i=0;i<10;i++)
-                if (listnot[i] < 0 || listnot[i] > 10)      // comprobamos que las not están entre 0 y 10 (mínimo y máximo), si no, error
+                if (listnot[i] < 0 || listnot[i] > 10)      // comprobamos que las notable están entre 0 y 10 (mínimo y máximo), si no, error
                 return -1;
 
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5) sus++;              // Por debajo de 5 suspenso
-                else if (listnot[i] >= 5 && listnot[i] < 7) apr++;// Nota para aprobar: 5
-                else if (listnot[i] >= 7 && listnot[i] < 9) not++;// Nota para notable: 7
-                else if (listnot[i] > 9) sbr++;         // Nota para sobresaliente: 9
+                if (listnot[i] < 5) Suspenso++;              // Por debajo de 5 suspenso
+                else if (listnot[i] >= 5 && listnot[i] < 7) Aprobado++;// Nota para aprobar: 5
+                else if (listnot[i] >= 7 && listnot[i] < 9) Notable++;// Nota para notable: 7
+                else if (listnot[i] > 9) Sobresaliente++;         // Nota para sobresaliente: 9
 
-                media = media + listnot[i];
+                Media = Media + listnot[i];
             }
 
-            media = media / listnot.Count;
+            Media = Media / listnot.Count;
 
-            return media;
+            return Media;
         }
     }
 }
